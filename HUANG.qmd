@@ -275,5 +275,3 @@ astro_grades_per_student |>
 ```
 
 
-
-
