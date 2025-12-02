@@ -1,7 +1,10 @@
 ---
 title: "HUANG"
-format: html
-editor: visual
+format: 
+  html:
+    code-fold: TRUE
+  pdf:
+    echo: false
 ---
 
 [Link to the github repository](https://github.com/clemence-code/grades-test#)
