@@ -596,4 +596,27 @@ pass_rate_group |>
   theme_minimal()
 ```
 
+# Q29 Course that is the most responsible of student failure
+
+```{r}
+course_failure_counts <- avg_grades_long |>
+  filter(mean_grade < 5) |>
+  group_by(course) |>
+  summarise(
+    n_students_fail = n_distinct(id),
+    .groups = "drop"
+  ) |>
+  arrange(desc(n_students_fail))
+
+course_failure_counts |>
+  kable(
+    caption = "Number of student with an average grade < 5 by course",
+    col.names = c("course","Number of failing students")
+  )
+
+course_more_failed <- course_failure_counts |>
+  slice_max(n_students_fail,n=1)
+```
+
+The course that is the most responsible of student failure owing to grades below than 5 is `{r} course_more_failed`.
 
