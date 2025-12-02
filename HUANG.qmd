@@ -487,3 +487,23 @@ final_grades |>
   ) +
   theme_minimal()
 ```
+
+
+# Q25 Adding effect of sex
+
+```{r}
+final_grades |>
+  mutate(
+    group = as.factor(group),
+    sex   = as.factor(sex)
+  ) |>
+  ggplot(aes(x = group, y = final_grade, fill = sex)) +
+  geom_boxplot(position = position_dodge(width = 0.8)) +
+  labs(
+    title = "Final grades by group and sex",
+    x = "Group",
+    y = "Final grade",
+    fill = "Sex"
+  ) +
+  theme_minimal()
+```
