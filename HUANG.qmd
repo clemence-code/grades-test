@@ -156,4 +156,26 @@ nb_grades <- grades |>
 The data set contains `r nb_grades` grades.
 
 
-# Q11 
+# Q11 Average of all the grades of one course
+
+```{r}
+neuro_grades_by_group <- grades |>
+  inner_join(courses, by = "course_id") |>
+  filter(course == "Neurotechnology and Mind Control") |>
+  inner_join(students |> select(id, group), by = "id") |>
+  group_by(group) |>
+  summarise(
+    mean_grade = mean(grade, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+neuro_grades_by_group |>
+  ggplot(aes(x = group, y = mean_grade)) +
+  geom_col() +
+  labs(
+    title = "Average grade in Neurotechnology and Mind Control by group",
+    x = "Group",
+    y = "Average grade"
+  )
+```
+
