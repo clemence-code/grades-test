@@ -311,3 +311,26 @@ astro_grades_per_student |>
 ```
 
 
+# Q18 Dependency of the number of grades with respect to both the group and the sex of the students
+```{r}
+astro_group_sex <- astro_grades_per_student |>
+  left_join(students |>
+              select(id, sex),
+            by = "id") |>
+  mutate(
+    group = as.factor(group),
+    sex   = as.factor(sex)
+  )
+
+astro_group_sex |>
+  ggplot(aes(x = group, y = n_grades_astro, fill = sex)) +
+  geom_violin(trim=FALSE) +
+  labs(
+    title = "Number of Astroengineering grades per student by group and sex",
+    x = "Group",
+    y = "Number of Astroengineering grades",
+    fill = "Sex"
+  ) +
+  theme_minimal()
+```
+
