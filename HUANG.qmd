@@ -471,3 +471,19 @@ final_grades |>
     col.names = c("ID", "Group", "Sex", "Final grade")
   )
 ```
+
+
+# Q24 Differences in final grades between the group
+
+```{r}
+final_grades |>
+  mutate(group = as.factor(group)) |>
+  ggplot(aes(x = group, y = final_grade, color = group)) +
+  geom_boxplot() +
+  labs(
+    title = "Final grades by group",
+    x = "Group",
+    y = "Final grade"
+  ) +
+  theme_minimal()
+```
