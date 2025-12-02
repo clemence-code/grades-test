@@ -13,12 +13,26 @@ library(vroom)
 library(dplyr)
 library(ggplot2)
 library(tidyr)
+library(knitr)
 ```
 
 # Q1 Load data
 ```{r}
 courses <- vroom(here("data","courses.csv"))
 ```
+
+
+# Q2 Formatted table
+
+```{r}
+courses |>
+  arrange(courses) |>
+  kable(
+    caption = "List of courses",
+    align   = "l"
+  )
+```
+
 
 
 
