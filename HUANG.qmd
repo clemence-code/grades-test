@@ -3,3 +3,22 @@ title: "HUANG"
 format: html
 editor: visual
 ---
+```{r}
+here::i_am("grades-test.Rproj")
+```
+
+```{r}
+library(here)
+library(vroom)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+```
+
+# Q1 Load data
+```{r}
+courses <- vroom(here("data","courses.csv"))
+```
+
+
+
