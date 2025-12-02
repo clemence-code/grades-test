@@ -146,4 +146,14 @@ oldest_by_group |>
   )
 ```
 
+# Q10 Number of grades in the dataset
+```{r}
+nb_grades <- grades |>
+  filter(!is.na(grade)) |>
+  nrow()
+```
 
+The data set contains `r nb_grades` grades.
+
+
+# Q11 
