@@ -253,6 +253,27 @@ students_grades |>
   theme_minimal()
 ```
 
+# Q15 Dataframe course Astroengineering and Planetary Colonization 
+```{r}
+astro_grades <- grades |>
+  inner_join(courses, by = "course_id") |>
+  filter(course == "Astroengineering and Planetary Colonization") |>
+  filter(!is.na(grade)) |>
+  count(id, name = "n_grades_astro")
+
+astro_grades_per_student <- students |>
+  select(id, group) |>
+  left_join(astro_grades, by = "id") |>
+  mutate(n_grades_astro = replace_na(n_grades_astro, 0L))
+
+astro_grades_per_student |>
+  head(10) |>
+  kable(
+    caption = "Number of grades in Astroengineering and Planetary Colonization per student",
+    col.names = c("ID", "Group", "Number of grades in Astroengineering")
+  )
+```
+
 
 
 
