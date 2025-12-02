@@ -447,3 +447,27 @@ avg_grades_wide |>
   ) +
   theme_minimal()
 ```
+
+
+# Q23 Dataframe final grade : average of the averages of their grades
+
+```{r}
+final_grades <- avg_grades_wide |>
+  left_join(students |> select(id, sex), by = "id") |>
+  mutate(
+    final_grade = rowMeans(
+      across(-c(id, group, sex)),
+      na.rm = TRUE
+    )
+  ) |>
+  select(id, group, sex, final_grade) |>
+  arrange(desc(final_grade))
+
+final_grades |>
+  head(5) |>
+  kable(
+    caption = "Top 5 students by final grade",
+    digits = 2,
+    col.names = c("ID", "Group", "Sex", "Final grade")
+  )
+```
