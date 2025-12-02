@@ -407,3 +407,43 @@ cor_neuro_xeno_by_group |>
     col.names = c("Group", "Correlation")
   )
 ```
+
+
+# Q22  Average grades in Neurotechnology as a function the average grades in Xenobiology for the students of the group in which those grades are the most correlated (positively or negatively)
+
+```{r}
+cor_neuro_xeno_by_group <- avg_grades_wide |>
+  group_by(group) |>
+  summarise(
+    cor_neuro_xeno = cor(
+      `Neurotechnology and Mind Control`,
+      `Xenobiology and Extraterrestrial Life`,
+      use = "complete.obs"
+    ),
+    .groups = "drop"
+  )
+
+target_group <- cor_neuro_xeno_by_group |>
+  slice_max(abs(cor_neuro_xeno), n = 1) |>
+  pull(group)
+
+avg_grades_wide |>
+  filter(group == target_group) |>
+  ggplot(
+    aes(
+      x = `Xenobiology and Extraterrestrial Life`,
+      y = `Neurotechnology and Mind Control`
+    )
+  ) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm")
+  labs(
+    title = paste(
+      "Average grades in Neurotechnology vs Xenobiology for group",
+      target_group
+    ),
+    x = "Average grade in Xenobiology and Extraterrestrial Life",
+    y = "Average grade in Neurotechnology and Mind Control"
+  ) +
+  theme_minimal()
+```
