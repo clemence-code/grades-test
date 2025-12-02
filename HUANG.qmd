@@ -365,3 +365,45 @@ avg_grades_wide |>
     caption = "Extract of average grades per student and course"
   )
 ```
+
+
+# Q20 Average grades in Quantum Physics and Time Manipulation as a function of the average grades in Artificial Intelligence and Robotics
+
+```{r}
+avg_grades_wide |>
+  ggplot(
+    aes(
+      x = `Artificial Intelligence and Robotics`,
+      y = `Quantum Physics and Time Manipulation`
+    )
+  ) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", se = FALSE)
+  labs(
+    title = "Average grades: Quantum Physics vs Artificial Intelligence and Robotics",
+    x = "Average grade in Artificial Intelligence and Robotics",
+    y = "Average grade in Quantum Physics and Time Manipulation"
+  ) +
+  theme_minimal()
+```
+
+# Q21 Correlation between the average grades in Neurotechnology and the average grades in Xenobiologygroup by group
+
+```{r}
+cor_neuro_xeno_by_group <- avg_grades_wide |>
+  group_by(group) |>
+  summarise(
+    cor_neuro_xeno = cor(
+      `Neurotechnology and Mind Control`,
+      `Xenobiology and Extraterrestrial Life`,
+      use = "complete.obs"
+    ),
+    .groups = "drop"
+  )
+
+cor_neuro_xeno_by_group |>
+  kable(
+    caption   = "Correlation between average grades in Neurotechnology and Mind Control and Xenobiology and Extraterrestrial Life by group",
+    col.names = c("Group", "Correlation")
+  )
+```
