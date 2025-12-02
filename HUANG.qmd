@@ -239,9 +239,20 @@ summary_grades |>
   )
 ```
 
-# Q14
+# Q14 Distribution of the grades of male and female students
 ```{r}
-
+students_grades |>
+  ggplot(aes(x = n_grades)) +
+  geom_histogram(binwidth = 1) +
+  facet_wrap(~ sex) +
+  labs(
+    title = "Distribution of the number of grades by sex",
+    x = "Number of grades",
+    y = "Number of students"
+  ) +
+  theme_minimal()
 ```
+
+
 
 
