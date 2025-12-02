@@ -334,3 +334,33 @@ astro_group_sex |>
   theme_minimal()
 ```
 
+# Q19 Dataframe average of grades
+```{r}
+avg_grades_long <- grades |>
+  filter(!is.na(grade)) |>
+  inner_join(students |> select(id, group), by = "id") |>
+  inner_join(courses |> select(course_id, course), by = "course_id") |>
+  group_by(id, group, course) |>
+  summarise(mean_grade = mean(grade), .groups = "drop")
+
+avg_grades_wide <- avg_grades_long |>
+  pivot_wider(
+    names_from  = course,
+    values_from = mean_grade
+  )
+
+avg_grades_wide |>
+  select(
+    id,
+    group,
+    `Neurotechnology and Mind Control`,
+    `Astroengineering and Planetary Colonization`
+  ) |>
+  head(10) |>
+  kable(
+    caption = "Extract of average grades per student and course"
+  )
+```
+
+
+
