@@ -125,3 +125,25 @@ median_age_by_group |>
   )
 ```
 
+# Q9 Oldest student in each group
+```{r}
+oldest_by_group <- students_age |>
+  group_by(group) |>
+  slice_max(age, n = 1, with_ties = FALSE) |>
+  ungroup() |>
+  arrange(desc(age)) |>
+  transmute(
+    id,
+    sex,
+    age = round(age, 1) 
+  )
+
+
+oldest_by_group |>
+  kable(
+    caption   = "Oldest student in each group",
+    col.names = c("ID", "Sex", "Age")
+  )
+```
+
+
