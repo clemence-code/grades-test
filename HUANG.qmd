@@ -650,3 +650,4 @@ success_by_age |>
   theme_minimal()
 ```
 
+Following the graphical representation we can conclude that older students (age > 23) have a better success rate than younger student (age < 23). 
