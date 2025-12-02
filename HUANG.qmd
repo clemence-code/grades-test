@@ -108,3 +108,20 @@ students_age |>
   theme_minimal()
 ```
 
+
+# Q8 Median age of each student in each group
+```{r}
+median_age_by_group <- students_age |>
+  group_by(group) |>
+  summarise(
+    median_age = as.integer(round(median(age, na.rm = TRUE))),
+    .groups = "drop"
+  )
+
+median_age_by_group |>
+  kable(
+    caption = "Median age of students by group",
+    col.names = c("Group", "Median age")
+  )
+```
+
