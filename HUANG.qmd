@@ -7,6 +7,14 @@ editor: visual
 here::i_am("grades-test.Rproj")
 ```
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo    = TRUE,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
 ```{r}
 library(here)
 library(vroom)
@@ -197,3 +205,43 @@ grades_sem |>
     fill = "Semester"
   )
 ```
+
+# Q13 Number of grades per students
+```{r}
+grades_per_student <- grades |>
+  filter(!is.na(grade)) |>
+  count(id, name = "n_grades")
+
+students_grades <- students |>
+  left_join(grades_per_student, by = "id") |>
+  mutate(n_grades = replace_na(n_grades, 0L))
+
+students_grades |>
+  head(10) |>
+  kable(
+    caption = "Extract of the number of grades per student",
+    col.names = c("ID", "Group", "Birth date", "Sex", "Number of grades")
+  )
+
+summary_grades <- students_grades |>
+  summarise(
+    min    = min(n_grades),
+    max    = max(n_grades),
+    mean   = mean(n_grades),
+    median = median(n_grades)
+  )
+
+summary_grades |>
+  kable(
+    caption = "Summary of the number of grades per student",
+    digits = 2,
+    col.names = c("Minimum", "Maximum", "Average", "Median")
+  )
+```
+
+# Q14
+```{r}
+
+```
+
+
