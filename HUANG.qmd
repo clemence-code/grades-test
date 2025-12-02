@@ -179,3 +179,21 @@ neuro_grades_by_group |>
   )
 ```
 
+
+# Q12 Distribution of the grades of 2 semesters
+```{r}
+grades_sem <- grades |>
+  inner_join(courses |> select(course_id, semester), by = "course_id") |>
+  filter(!is.na(grade)) |>
+  mutate(semester = as.factor(semester))
+
+grades_sem |>
+  ggplot(aes(x = grade, fill = semester)) +
+  geom_density(alpha = 0.5) +
+  labs(
+    title = "Distribution of grades by semester",
+    x = "Grade",
+    y = "Density",
+    fill = "Semester"
+  )
+```
