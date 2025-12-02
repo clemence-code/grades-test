@@ -558,3 +558,21 @@ pass_year |>
     col.names = c("ID", "Group", "Final grade", "Pass")
   )
 ```
+
+
+# Q27 Number of students who do not pass and yet have a final grade larger or equal to 10
+```{r}
+n_not_pass_final <- pass_year |>
+  filter(!pass, final_grade >= 10) |>
+  summarise(n = n())
+
+n_not_pass_final |>
+  kable(
+    caption   = "Number of students who do not pass but have a final grade ≥ 10",
+    col.names = "Number of students"
+  )
+```
+
+There are `r n_not_pass_final` student that do not pass but have a final grade greater than 10.
+
+
