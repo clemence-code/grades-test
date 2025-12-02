@@ -74,5 +74,20 @@ students |>
   theme_minimal()
 ```
 
+# Q6 Gender balance in each group
+
+```{r}
+students |>
+  ggplot(aes(x = group, fill = sex)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Gender balance by group",
+    x = "Group",
+    y = "Share of students",
+    fill = "Sex"
+  ) +
+  theme_minimal()
+```
 
 
