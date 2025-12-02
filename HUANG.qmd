@@ -59,5 +59,20 @@ grades <- vroom(
 )
 ```
 
+# Q5 Number of students per group
+
+```{r}
+students |>
+  count(group, name = "n_students") |>
+  ggplot(aes(x = group, y = n_students)) +
+  geom_col() +
+  labs(
+    title = "Number of students per group",
+    x = "Group",
+    y = "Number of students"
+  ) +
+  theme_minimal()
+```
+
 
 
