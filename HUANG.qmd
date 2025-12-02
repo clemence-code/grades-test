@@ -3,6 +3,10 @@ title: "HUANG"
 format: html
 editor: visual
 ---
+
+[Link to the github repository](https://github.com/clemence-code/grades-test#)
+
+
 ```{r}
 here::i_am("grades-test.Rproj")
 ```
@@ -361,26 +365,3 @@ avg_grades_wide |>
     caption = "Extract of average grades per student and course"
   )
 ```
-
-# Q20 Average grades in Quantum Physics and Time Manipulation as a function of the average grades in Artificial Intelligence and Robotics
-
-```{r}
-avg_grades_wide |>
-  ggplot(
-    aes(
-      x = `Artificial Intelligence and Robotics`,
-      y = `Quantum Physics and Time Manipulation`
-    )
-  ) +
-  geom_point(alpha = 0.4) +
-  geom_smooth(method = "lm", se = FALSE)
-  labs(
-    title = "Average grades: Quantum Physics vs Artificial Intelligence and Robotics",
-    x = "Average grade in Artificial Intelligence and Robotics",
-    y = "Average grade in Quantum Physics and Time Manipulation"
-  ) +
-  theme_minimal()
-```
-
-
-
