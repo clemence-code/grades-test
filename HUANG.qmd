@@ -274,4 +274,40 @@ astro_grades_per_student |>
   )
 ```
 
+# Q16 Distribution of the number of grades in Astroengineering
+```{r}
+dist_astro_grades <- astro_grades_per_student |>
+  count(n_grades_astro, name = "n_students")
+
+dist_astro_grades |>
+  kable(
+    caption   = "Distribution of the number of grades in Astroengineering",
+    col.names = c("Number of grades", "Number of students")
+  )
+
+dist_astro_grades |>
+  ggplot(aes(x = n_grades_astro, y = n_students)) +
+  geom_col() +
+  labs(
+    title = "Distribution of the number of grades in Astroengineering",
+    x = "Number of grades",
+    y = "Number of students"
+  ) +
+  theme_minimal()
+```
+
+# Q17 Number of grades depending on the group
+```{r}
+astro_grades_per_student |>
+  mutate(group = as.factor(group)) |>
+  ggplot(aes(x = group, y = n_grades_astro)) +
+  geom_violin(trim = FALSE) +
+  labs(
+    title = "Distribution of Astroengineering grades per student by group",
+    x = "Group",
+    y = "Number of Astroengineering grades"
+  ) +
+  theme_minimal()
+```
+
 
