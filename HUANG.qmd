@@ -620,3 +620,33 @@ course_more_failed <- course_failure_counts |>
 
 The course that is the most responsible of student failure owing to grades below than 5 is `{r} course_more_failed`.
 
+# Q30 Effect of age on success
+
+We use students_age that we have already computed in Q7.
+
+```{r}
+pass_age <- pass_year |>
+  inner_join(students_age |> select(id, age), by = "id") |>
+  mutate(age = floor(age))
+
+success_by_age <- pass_age |>
+  group_by(age) |>
+  summarise(
+    success_rate = mean(pass),
+    n_students   = n(),
+    .groups = "drop"
+  )
+
+success_by_age |>
+  ggplot(aes(x = age, y = success_rate)) +
+  geom_line() +
+  geom_point() +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Success rate as a function of age",
+    x = "Age (years)",
+    y = "Success rate"
+  ) +
+  theme_minimal()
+```
+
