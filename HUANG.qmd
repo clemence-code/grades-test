@@ -34,5 +34,30 @@ courses |>
 ```
 
 
+# Q3 Load Students dataset
+
+```{r}
+
+students <- vroom(
+  here("data", "students.csv"),
+  col_types = cols(
+    id         = col_integer(),
+    group      = col_factor(),
+    birth_date = col_date(),
+    sex        = col_factor()
+  )
+)
+```
+
+# Q4 Load grades dataset 
+
+```{r}
+grades <- vroom(
+  here("data", "grades.csv"),
+  delim = ":",
+  na    = "*"
+)
+```
+
 
 
