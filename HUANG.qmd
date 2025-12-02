@@ -575,4 +575,25 @@ n_not_pass_final |>
 
 There are `r n_not_pass_final` student that do not pass but have a final grade greater than 10.
 
+# Q28 Pass rate per group and graphical representation
+```{r}
+pass_rate_group <- pass_year |>
+  group_by(group) |>
+  summarise(
+    pass_rate = mean(pass),
+    .groups = "drop"
+  )
+
+pass_rate_group |>
+  ggplot(aes(x = group, y = pass_rate,fill=group)) +
+  geom_col() +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Pass rate by group",
+    x = "Group",
+    y = "Pass rate"
+  ) +
+  theme_minimal()
+```
+
 
