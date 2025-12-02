@@ -90,4 +90,21 @@ students |>
   theme_minimal()
 ```
 
+# Q7 Distribution of the age of the student
+```{r}
+students_age <- students |>
+  mutate(
+    age = as.numeric(difftime(Sys.Date(), birth_date, units = "days")) / 365.25
+  )
+
+students_age |>
+  ggplot(aes(x = age)) +
+  geom_histogram(binwidth = 1) +
+  labs(
+    title = "Distribution of students' age",
+    x = "Age (years)",
+    y = "Number of students"
+  ) +
+  theme_minimal()
+```
 
